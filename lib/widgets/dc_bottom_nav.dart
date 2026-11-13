@@ -1,59 +1,134 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
+import 'animated_press_button.dart';
 
 class _NavItem {
-  const _NavItem(this.label, this.icon, this.activeIcon);
+  const _NavItem({
+    required this.label,
+    required this.icon,
+    required this.activeIcon,
+  });
+
   final String label;
   final IconData icon;
   final IconData activeIcon;
 }
 
-/// Menu bawah: Beranda, Scan, Riwayat, Panduan.
 class DcBottomNav extends StatelessWidget {
-  const DcBottomNav({super.key, required this.currentIndex, required this.onTap});
+  const DcBottomNav({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   final int currentIndex;
   final ValueChanged<int> onTap;
 
   static const _items = [
-    _NavItem('Beranda', Icons.home_outlined, Icons.home_rounded),
-    _NavItem('Scan', Icons.photo_camera_outlined, Icons.photo_camera_rounded),
-    _NavItem('Riwayat', Icons.history_rounded, Icons.history_rounded),
-    _NavItem('Panduan', Icons.menu_book_outlined, Icons.menu_book_rounded),
+    _NavItem(
+      label: 'Beranda',
+      icon: Icons.home_outlined,
+      activeIcon: Icons.home_rounded,
+    ),
+    _NavItem(
+      label: 'Scan',
+      icon: Icons.photo_camera_outlined,
+      activeIcon: Icons.photo_camera_rounded,
+    ),
+    _NavItem(
+      label: 'Riwayat',
+      icon: Icons.history_rounded,
+      activeIcon: Icons.history_rounded,
+    ),
+    _NavItem(
+      label: 'Panduan',
+      icon: Icons.menu_book_outlined,
+      activeIcon: Icons.menu_book_rounded,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFFFEFEFF),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFEFEFF),
         boxShadow: [
-          BoxShadow(color: DcColors.shadow, blurRadius: 16, offset: Offset(0, -2)),
+          BoxShadow(
+            color: DcColors.shadow.withValues(alpha: 0.08),
+            blurRadius: 20,
+            offset: const Offset(0, -4),
+          ),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 6,
+            offset: const Offset(0, -1),
+          ),
         ],
+        border: Border(
+          top: BorderSide(
+            color: Colors.black.withValues(alpha: 0.04),
+            width: 1,
+          ),
+        ),
       ),
       child: SafeArea(
         top: false,
-        child: SizedBox(
-          height: 70,
+        child: Container(
+          height: 68,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           child: Row(
-            children: List.generate(_items.length, (i) {
-              final item = _items[i];
-              final active = i == currentIndex;
-              final color = active ? DcColors.primary : DcColors.textPrimary;
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(_items.length, (index) {
+              final item = _items[index];
+              final isActive = index == currentIndex;
+
               return Expanded(
-                child: InkWell(
-                  onTap: () => onTap(i),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(active ? item.activeIcon : item.icon, color: color, size: 26),
-                      const SizedBox(height: 4),
-                      Text(
-                        item.label,
-                        style: dc(12, weight: active ? FontWeight.w800 : FontWeight.w700, color: color),
-                      ),
-                    ],
+                child: AnimatedPress(
+                  scaleAmount: 0.90,
+                  onTap: () => onTap(index),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeOutCubic,
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    decoration: BoxDecoration(
+                      color: isActive
+                          ? DcColors.primary.withValues(alpha: 0.09)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AnimatedScale(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeOutBack,
+                          scale: isActive ? 1.15 : 1.0,
+                          child: Icon(
+                            isActive ? item.activeIcon : item.icon,
+                            color: isActive
+                                ? DcColors.primary
+                                : DcColors.textMuted,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 200),
+                          style: dc(
+                            11.5,
+                            weight: isActive
+                                ? FontWeight.w800
+                                : FontWeight.w600,
+                            color: isActive
+                                ? DcColors.primary
+                                : DcColors.textMuted,
+                          ),
+                          child: Text(item.label),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

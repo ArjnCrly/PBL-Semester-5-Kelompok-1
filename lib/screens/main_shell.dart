@@ -7,7 +7,6 @@ import 'history_screen.dart';
 import 'home_screen.dart';
 import 'scan_flow.dart';
 
-/// Kerangka utama: header + isi tab + menu bawah.
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
 
@@ -33,7 +32,11 @@ class _MainShellState extends State<MainShell> {
               child: IndexedStack(
                 index: _index,
                 children: [
-                  HomeScreen(onStartScan: () => _go(1)),
+                  HomeScreen(
+                    onStartScan: () => _go(1),
+                    onOpenHistory: () => _go(2),
+                    onOpenGuide: () => _go(3),
+                  ),
                   ScanFlow(onOpenHistory: () => _go(2)),
                   const HistoryScreen(),
                   const GuideScreen(),

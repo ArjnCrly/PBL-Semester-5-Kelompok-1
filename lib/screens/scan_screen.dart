@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
+import '../widgets/animated_press_button.dart';
 
 enum ScanTarget { fruit, stem }
 
@@ -19,8 +20,6 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  // Pilihan awal tidak disebut di desain; dipilih "Batang" karena label
-  // pratinjau pada desain berbunyi "Fokus Batang Terkunci".
   ScanTarget _target = ScanTarget.stem;
 
   @override
@@ -327,8 +326,9 @@ class _CaptureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return AnimatedPress(
       onTap: onTap,
+      scaleAmount: 0.90,
       child: Container(
         width: 100,
         height: 100,
@@ -370,8 +370,9 @@ class _GalleryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return AnimatedPress(
       onTap: onTap,
+      scaleAmount: 0.90,
       child: Container(
         width: 64,
         height: 64,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/diagnosis.dart';
 import '../theme/app_theme.dart';
+import '../widgets/animated_press_button.dart';
 
 class AnalysisScreen extends StatelessWidget {
   const AnalysisScreen({
@@ -202,19 +203,23 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton.icon(
-      onPressed: onTap,
-      icon: Icon(icon, size: 20),
-      label: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(label, style: dc(14.5, weight: FontWeight.w700, color: Colors.white)),
-      ),
-      style: FilledButton.styleFrom(
-        backgroundColor: DcColors.primary,
-        foregroundColor: Colors.white,
-        minimumSize: const Size.fromHeight(52),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    return AnimatedPress(
+      onTap: onTap,
+      scaleAmount: 0.94,
+      child: FilledButton.icon(
+        onPressed: onTap,
+        icon: Icon(icon, size: 20),
+        label: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(label, style: dc(14.5, weight: FontWeight.w700, color: Colors.white)),
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: DcColors.primary,
+          foregroundColor: Colors.white,
+          minimumSize: const Size.fromHeight(52),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
       ),
     );
   }
