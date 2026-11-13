@@ -56,7 +56,11 @@ class _SaveSuccessDialog extends StatelessWidget {
             color: DcColors.surface,
             borderRadius: BorderRadius.circular(28),
             boxShadow: const [
-              BoxShadow(color: Color(0x29141B2C), blurRadius: 32, offset: Offset(0, 12)),
+              BoxShadow(
+                color: Color(0x29141B2C),
+                blurRadius: 32,
+                offset: Offset(0, 12),
+              ),
             ],
           ),
           child: Column(
@@ -81,22 +85,39 @@ class _SaveSuccessDialog extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
-                  onPressed: () => Navigator.of(context).pop(SaveDialogAction.openHistory),
+                  onPressed: () =>
+                      Navigator.of(context).pop(SaveDialogAction.openHistory),
                   icon: const Icon(Icons.history_rounded, size: 22),
-                  label: Text('Lihat di Riwayat', style: dc(16, weight: FontWeight.w700, color: Colors.white)),
+                  label: Text(
+                    'Lihat di Riwayat',
+                    style: dc(16, weight: FontWeight.w700, color: Colors.white),
+                  ),
                   style: FilledButton.styleFrom(
                     backgroundColor: DcColors.primary,
                     minimumSize: const Size.fromHeight(54),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 6),
               TextButton.icon(
-                onPressed: () => Navigator.of(context).pop(SaveDialogAction.scanAgain),
-                icon: const Icon(Icons.photo_camera_outlined, size: 20, color: DcColors.textSecondary),
-                label: Text('Selesai & Pindai Lagi',
-                    style: dc(15, weight: FontWeight.w700, color: DcColors.textSecondary)),
+                onPressed: () =>
+                    Navigator.of(context).pop(SaveDialogAction.scanAgain),
+                icon: const Icon(
+                  Icons.photo_camera_outlined,
+                  size: 20,
+                  color: DcColors.textSecondary,
+                ),
+                label: Text(
+                  'Selesai & Pindai Lagi',
+                  style: dc(
+                    15,
+                    weight: FontWeight.w700,
+                    color: DcColors.textSecondary,
+                  ),
+                ),
               ),
             ],
           ),
@@ -120,18 +141,31 @@ class _SuccessIcon extends StatelessWidget {
           Container(
             width: 96,
             height: 96,
-            decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFE3F7EC)),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFFE3F7EC),
+            ),
           ),
           Container(
             width: 78,
             height: 78,
-            decoration: const BoxDecoration(shape: BoxShape.circle, color: DcColors.greenContainer),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: DcColors.greenContainer,
+            ),
             child: Center(
               child: Container(
                 width: 38,
                 height: 38,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF1B6B4F)),
-                child: const Icon(Icons.check_rounded, color: Colors.white, size: 26),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFF1B6B4F),
+                ),
+                child: const Icon(
+                  Icons.check_rounded,
+                  color: Colors.white,
+                  size: 26,
+                ),
               ),
             ),
           ),
@@ -146,7 +180,11 @@ class _SuccessIcon extends StatelessWidget {
                 color: DcColors.primary,
                 border: Border.all(color: Colors.white, width: 3),
               ),
-              child: const Icon(Icons.eco_outlined, color: Colors.white, size: 14),
+              child: const Icon(
+                Icons.eco_outlined,
+                color: Colors.white,
+                size: 14,
+              ),
             ),
           ),
         ],
@@ -183,18 +221,27 @@ class _Summary extends StatelessWidget {
             value: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
               decoration: BoxDecoration(
-                color: DcColors.greenContainer.withOpacity(0.7),
+                color: DcColors.greenContainer.withValues(alpha: 0.7),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(diagnosis.confidenceLabel,
-                  style: dc(13.5, weight: FontWeight.w800, color: DcColors.onGreen)),
+              child: Text(
+                diagnosis.confidenceLabel,
+                style: dc(
+                  13.5,
+                  weight: FontWeight.w800,
+                  color: DcColors.onGreen,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 12),
           _Row(
             icon: Icons.schedule_rounded,
             label: 'Waktu',
-            value: Text(formatTanggalJamWib(diagnosis.time), style: dc(13, weight: FontWeight.w600)),
+            value: Text(
+              formatTanggalJamWib(diagnosis.time),
+              style: dc(13, weight: FontWeight.w600),
+            ),
           ),
           const SizedBox(height: 12),
           _Row(
@@ -206,11 +253,20 @@ class _Summary extends StatelessWidget {
                 Container(
                   width: 6,
                   height: 6,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: DcColors.onGreen),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: DcColors.onGreen,
+                  ),
                 ),
                 const SizedBox(width: 6),
-                Text('Tersimpan Lokal & Cloud',
-                    style: dc(13, weight: FontWeight.w800, color: DcColors.onGreen)),
+                Text(
+                  'Tersimpan Lokal & Cloud',
+                  style: dc(
+                    13,
+                    weight: FontWeight.w800,
+                    color: DcColors.onGreen,
+                  ),
+                ),
               ],
             ),
           ),
